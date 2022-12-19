@@ -1,39 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Interactive pricing component</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="titre_page">
+      <h1 class="titre_1">Simple, traffic-based pricing</h1>
+      <h4 class="titre_2">
+        Sign-up for our 30-day trial. No credit card required.
+      </h4>
+    </section>
+
+    <section class="carte">
+      <div class="prix">
+        <p class="nombre_de_vue"><span id="vue">100</span>K Pageviews</p>
+        <p class="montan_par_month"><span id="montan">$16.00 </span> <span id="month">/month</span></p>
+      </div>
+
+      <input
+        type="range"
+        name="log_price"
+        id="long_range"
+        min="1"
+        max="300"
+        value="100"
+        oninput="ragneslide(this.value)"
+        onload="ragneslide(this.value)"
+      />
+
+      <div class="details">
+        <p class="Monthly">Monthly Billing</p>
+
+        <div class="toggle">
+          <input type="checkbox" name="change" id="check" class="check" />
+          <label for="check" class="label">
+            <div class="bool"></div>
+          </label>
+        </div>
+
+        <p class="yearly">Yearly Billing <span class="discount">25% discount</span></p>
+      </div>
+        
+      <hr />
+
+      <div class="fouter">
+        <ul>
+          <li>
+            <img src="./images/icon-check.svg" alt="icon_check" /><span class="list">Unlimited
+            websites</span> 
+          </li>
+          <li>
+            <img src="./images/icon-check.svg" alt="icon_check" /> <span class="list">100% data
+            ownership</span> 
+          </li>
+          <li>
+            <img src="./images/icon-check.svg" alt="icon_check" /> <span class="list">Email reports</span> 
+          </li>
+        </ul>
+
+        <button class="btn_start">Start my trial</button>
+      </div>
+    </section>
+
+    <script defer="true" type="text/javascript">
+      const Nombre_de_month=document.getElementById("month");
+      const check=document.getElementById("check");
+      const Nombre_de_vue=document.getElementById("vue");
+      const montant=document.getElementById("montan");  
+
+      function ragneslide(value = 100) {
+         
+        if (Nombre_de_month.innerText=="/month") {
+          
+          Nombre_de_vue.textContent = value;
+          montan.textContent = `$${((value * 16.00) / 100).toFixed(2) }`;
+        }
+        if (Nombre_de_month.innerText=="/year") {
+          
+          Nombre_de_vue.textContent = value*12;
+          montant.textContent = `$${(((value * 16.00) / 100)*12).toFixed(2) }`;
+        }
+
+
+        window.addEventListener("load", () => {
+          document.getElementById("long_range").value = 100;
+        });
+        
+        return value
+      }
+ragneslide();
+
+
+function swich_date() {
   
-  <title>Frontend Mentor | Interactive pricing component</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
 
-  Simple, traffic-based pricing
-  Sign-up for our 30-day trial. No credit card required. 
+       check.addEventListener("change",(e)=>{
 
-  Pageviews
-  $ /month
+       const data=Nombre_de_vue.innerText
+      
+           
+       if (e.target.checked) {
+        
+         month.textContent="/year";
+         Nombre_de_vue.textContent = data*12;
+         montant.textContent = `$${ (((data * 16.00) / 100)*12).toFixed(2) }`;
+        
+       } else {
 
-  Monthly Billing
-  Yearly Billing 25% discount
-
-  Unlimited websites
-  100% data ownership
-  Email reports
-
-  Start my trial
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+        month.textContent="/month";
+        Nombre_de_vue.textContent = (data/12).toFixed(0);
+        montant.textContent = `$${ (((data * 16.00) / 100)/12).toFixed(2)}`;
+       }
+       }
+   )
+        
+      };
+      swich_date();
+      
+    </script>
+  </body>
 </html>
